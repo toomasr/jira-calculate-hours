@@ -79,7 +79,7 @@ You Need More Help?
 1. Install [Tampermonkey](https://chrome.google.com/webstore/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo?hl=en)
 2. Open up Tampermonkey and create a new script
 3. Copy paste the script from previous section
-4. **Modify @include URL in the header**
+4. **Modify @include URL in the header to match your JIRA url**
 5. Navigate to your JIRA issues and behold, there is a number in the footer
 
 FAQ
