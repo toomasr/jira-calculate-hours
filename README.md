@@ -21,6 +21,7 @@ I didn't bother creating a separate JS file for the snippet but you can rather j
 // @version             0.1
 // @description Shows the total of hours in the footer
 // @copyright   2014+, Toomas Römer
+// @author    Toomas Römer
 // ==/UserScript==
 
 jQuery(document).ready(
