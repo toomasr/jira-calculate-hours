@@ -3,7 +3,7 @@
 Motivation
 ----------
 
-When I wonder around different JIRA filters then every now and then I would really love to know the total estimation value of that page.
+When I wander around different JIRA filters then every now and then I would really love to know the total estimation value of that page.
 
 To achieve that I wrote a JavaScript snippet that you can paste into [Tampermonkey](https://chrome.google.com/webstore/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo?hl=en) or other [equivalent](http://appcrawlr.com/app/uberGrid/652164).
 
