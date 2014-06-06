@@ -34,11 +34,10 @@ function calculateHours() {
         if (time.length>0)
                 minutes += accum(time);
     });
-    
+
     var hours = 0;
     if (minutes != 0)
         hours = minutes/60;
-    console.log(minutes)
     var result = jQuery(".footer-body ul li:last").after("<li>Estimate: "+(hours)+" hours</li>");
 }
 
@@ -49,23 +48,19 @@ function accum(timeStr) {
         var time = times[i];
         var match = new Array();
         if ((match = /([0-9]+)\s*minutes?/.exec(time)) != null) {
-            console.log("Minutes", match[1], time)
             rtrn+=parseInt(match[1], 10);
-        } 
+        }
         else if ((match = /([0-9]+)\s*hours?/.exec(time)) != null) {
-            console.log("Hours", match[1], time)
             rtrn+=parseInt(match[1]*60);
-        } 
+        }
         else if ((match = /([0-9]+)\s*days?/.exec(time)) != null) {
-            console.log("Days", match[1], time)
             rtrn+=parseInt(match[1]*8*60);
-        } 
+        }
         else if ((match = /([0-9]+)\s*weeks?/.exec(time)) != null) {
-            console.log("Weeks", match[1], time)
             rtrn+=parseInt(match[1]*8*60*5);
-        } 
+        }
         else {
-            console.log("The string didn't match", timeStr);
+            throw ("The string didn't match" + timeStr);
         }
     }
     return rtrn;
