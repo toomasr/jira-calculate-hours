@@ -24,22 +24,31 @@ I didn't bother creating a separate JS file for the snippet but you can rather j
 // @author    Toomas Römer
 // ==/UserScript==
 
-jQuery(document).ready(
-        calculateHours
-        )
+jQuery(document).ready(calculateHours);
 
 function calculateHours() {
+    var totalOriginalEstimate = sumFields(".timeoriginalestimate");
+    var totalRemainingEstimate = sumFields(".timeestimate");
+
+    var resultRow = jQuery(".issuerow:last").clone();
+    resultRow.find("td").html("");
+    resultRow.find(".timeoriginalestimate").html(totalOriginalEstimate + " hours");
+    resultRow.find(".timeestimate").html(totalRemainingEstimate + " hours");
+    
+    jQuery(".issuerow:last").after(resultRow);
+}
+
+function sumFields(field) {
     var minutes = 0;
-    jQuery(".timeoriginalestimate").each(function(key,val) {
+    jQuery(field).each(function(key,val) {
         var time = jQuery(val).text();
-        if (time.length>0)
-                minutes += accum(time);
+        if (time.length > 0) {
+            minutes += accum(time);
+        }
     });
 
-    var hours = 0;
-    if (minutes != 0)
-        hours = minutes/60;
-    var result = jQuery(".footer-body ul li:last").after("<li>Estimate: "+(hours)+" hours</li>");
+    var hours = minutes/60;
+    return hours;
 }
 
 function accum(timeStr) {
@@ -47,18 +56,18 @@ function accum(timeStr) {
     var rtrn = 0;
     for (var i = 0; i < times.length; i++) {
         var time = times[i];
-        var match = new Array();
+        var match;
         if ((match = /([0-9]+)\s*minutes?/.exec(time)) != null) {
             rtrn+=parseInt(match[1], 10);
         }
         else if ((match = /([0-9]+)\s*hours?/.exec(time)) != null) {
-            rtrn+=parseInt(match[1]*60);
+            rtrn+=parseInt(match[1]*60, 10);
         }
         else if ((match = /([0-9]+)\s*days?/.exec(time)) != null) {
-            rtrn+=parseInt(match[1]*8*60);
+            rtrn+=parseInt(match[1]*8*60, 10);
         }
         else if ((match = /([0-9]+)\s*weeks?/.exec(time)) != null) {
-            rtrn+=parseInt(match[1]*8*60*5);
+            rtrn+=parseInt(match[1]*8*60*5, 10);
         }
         else {
             throw ("The string didn't match" + timeStr);
@@ -84,8 +93,3 @@ FAQ
 * **I've completed the instructions but somestimes the value remains stale in the footer?**
 
 I don't why this happens but once you reload the page it is fine again for me. If you know the reason and fix do let me know and I'll update my script!
-
-* **Why on earth are you showing this in the footer?**
-
-Well, I tried many other locations in the page but couldn't find a better location with my time investment and CSS/JS skills. Please improve and contribute!
-
