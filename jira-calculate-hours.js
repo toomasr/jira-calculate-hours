@@ -7,23 +7,21 @@
 // @copyright   2014+, Toomas Römer
 // @author    Toomas Römer
 // ==/UserScript==
+"use strict";
 
-jQuery(document).ready(
-        calculateHours
-        )
+jQuery(document).ready(calculateHours);
 
 function calculateHours() {
     var minutes = 0;
     jQuery(".timeoriginalestimate").each(function(key,val) {
         var time = jQuery(val).text();
         if (time.length>0)
-                minutes += accum(time);
+            minutes += accum(time);
     });
 
-    var hours = 0;
-    if (minutes != 0)
-        hours = minutes/60;
-    var result = jQuery(".footer-body ul li:last").after("<li>Estimate: "+(hours)+" hours</li>");
+    var hours = minutes/60;
+
+    jQuery(".footer-body ul li:last").after("<li>Estimate: "+(hours)+" hours</li>");
 }
 
 function accum(timeStr) {
@@ -31,17 +29,17 @@ function accum(timeStr) {
     var rtrn = 0;
     for (var i = 0; i < times.length; i++) {
         var time = times[i];
-        var match = new Array();
-        if ((match = /([0-9]+)\s*minutes?/.exec(time)) != null) {
+        var match;
+        if ((match = /([0-9]+)\s*minutes?/.exec(time))) {
             rtrn+=parseInt(match[1], 10);
         }
-        else if ((match = /([0-9]+)\s*hours?/.exec(time)) != null) {
+        else if ((match = /([0-9]+)\s*hours?/.exec(time))) {
             rtrn+=parseInt(match[1]*60);
         }
-        else if ((match = /([0-9]+)\s*days?/.exec(time)) != null) {
+        else if ((match = /([0-9]+)\s*days?/.exec(time))) {
             rtrn+=parseInt(match[1]*8*60);
         }
-        else if ((match = /([0-9]+)\s*weeks?/.exec(time)) != null) {
+        else if ((match = /([0-9]+)\s*weeks?/.exec(time))) {
             rtrn+=parseInt(match[1]*8*60*5);
         }
         else {
