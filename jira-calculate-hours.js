@@ -9,9 +9,23 @@
 // ==/UserScript==
 "use strict";
 
-jQuery(document).ready(calculateHours);
+jQuery(document).ready(function() {
+    // Perform initial calculation on page load.
+    addEstimatesFooter();
 
-function calculateHours() {
+    // Monitor .navigator-content for changes.
+    // When #issuetable is rewritten, recalculate estimates footer.
+    var oldTable = jQuery("#issuetable").get(0);
+    jQuery(".navigator-content").bind('DOMSubtreeModified', function(e) {
+        var newTable = jQuery("#issuetable").get(0);
+        if (newTable !== oldTable) {
+            oldTable = newTable;
+            addEstimatesFooter();
+        }
+    });
+});
+
+function addEstimatesFooter() {
     // Clone last row and clean it from content
     var resultRow = jQuery("#issuetable .issuerow:last").clone();
     resultRow.find("td").html("");
