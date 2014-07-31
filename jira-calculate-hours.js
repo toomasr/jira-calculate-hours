@@ -43,17 +43,7 @@ function formatEstimate(minutes) {
     }
 
     var hours = minutes / 60;
-    if (hours < 8) {
-        return roundTo(hours, 1) + " hours";
-    }
-
-    var days = hours / 8;
-    if (days < 5) {
-        return roundTo(days, 1) + " days";
-    }
-
-    var weeks = days / 5;
-    return roundTo(weeks, 1) + " weeks";
+    return roundTo(hours, 1) + " hours";
 }
 
 function roundTo(number, decimals) {
