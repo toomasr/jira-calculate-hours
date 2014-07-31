@@ -12,22 +12,27 @@
 jQuery(document).ready(calculateHours);
 
 function calculateHours() {
+    // Clone last row and clean it from content
+    var resultRow = jQuery("#issuetable .issuerow:last").clone();
+    resultRow.find("td").html("");
+    // Calculate sums for the estimate columns
+    resultRow.find(".timeoriginalestimate").html(sumHours(".timeoriginalestimate") + " hours");
+    resultRow.find(".timeestimate").html(sumHours(".timeestimate") + " hours");
+
+    var footer = jQuery("<tfoot></tfoot>").append(resultRow);
+    jQuery("#issuetable").append(footer);
+}
+
+function sumHours(field) {
     var minutes = 0;
-    jQuery(".timeoriginalestimate").each(function(key,val) {
+    jQuery(field).each(function(key,val) {
         var time = jQuery(val).text();
         if (time) {
             minutes += parseToMinutes(time);
         }
     });
 
-    var hours = minutes/60;
-
-    var resultRow = jQuery("#issuetable .issuerow:last").clone();
-    resultRow.find("td").html("");
-    resultRow.find(".timeoriginalestimate").html(hours + " hours");
-
-    var footer = jQuery("<tfoot></tfoot>").append(resultRow);
-    jQuery("#issuetable").append(footer);
+    return minutes / 60;
 }
 
 function parseToMinutes(timeStr) {
