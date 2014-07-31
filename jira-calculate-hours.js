@@ -22,7 +22,12 @@ function calculateHours() {
 
     var hours = minutes/60;
 
-    jQuery(".footer-body ul li:last").after("<li>Estimate: "+(hours)+" hours</li>");
+    var resultRow = jQuery("#issuetable .issuerow:last").clone();
+    resultRow.find("td").html("");
+    resultRow.find(".timeoriginalestimate").html(hours + " hours");
+
+    var footer = jQuery("<tfoot></tfoot>").append(resultRow);
+    jQuery("#issuetable").append(footer);
 }
 
 function parseToMinutes(timeStr) {
