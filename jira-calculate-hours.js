@@ -15,8 +15,9 @@ function calculateHours() {
     var minutes = 0;
     jQuery(".timeoriginalestimate").each(function(key,val) {
         var time = jQuery(val).text();
-        if (time.length>0)
-            minutes += accum(time);
+        if (time) {
+            minutes += parseToMinutes(time);
+        }
     });
 
     var hours = minutes/60;
@@ -24,7 +25,7 @@ function calculateHours() {
     jQuery(".footer-body ul li:last").after("<li>Estimate: "+(hours)+" hours</li>");
 }
 
-function accum(timeStr) {
+function parseToMinutes(timeStr) {
     var times = timeStr.split(",") ;
     var rtrn = 0;
     for (var i = 0; i < times.length; i++) {
