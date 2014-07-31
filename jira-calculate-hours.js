@@ -16,14 +16,33 @@ function calculateHours() {
     var resultRow = jQuery("#issuetable .issuerow:last").clone();
     resultRow.find("td").html("");
     // Calculate sums for the estimate columns
-    resultRow.find(".timeoriginalestimate").html(sumHours(".timeoriginalestimate") + " hours");
-    resultRow.find(".timeestimate").html(sumHours(".timeestimate") + " hours");
+    resultRow.find(".timeoriginalestimate").html(formatEstimate(sumMinutes(".timeoriginalestimate")));
+    resultRow.find(".timeestimate").html(formatEstimate(sumMinutes(".timeestimate")));
 
     var footer = jQuery("<tfoot></tfoot>").append(resultRow);
     jQuery("#issuetable").append(footer);
 }
 
-function sumHours(field) {
+function formatEstimate(minutes) {
+    if (minutes < 60) {
+        return minutes + " minutes";
+    }
+
+    var hours = minutes / 60;
+    if (hours < 8) {
+        return roundTo(hours, 1) + " hours";
+    }
+
+    var days = hours / 8;
+    return roundTo(days, 1) + " days";
+}
+
+function roundTo(number, decimals) {
+    var pow = Math.pow(10, decimals);
+    return Math.round(number*pow) / pow;
+}
+
+function sumMinutes(field) {
     var minutes = 0;
     jQuery(field).each(function(key,val) {
         var time = jQuery(val).text();
@@ -32,7 +51,7 @@ function sumHours(field) {
         }
     });
 
-    return minutes / 60;
+    return minutes;
 }
 
 function parseToMinutes(timeStr) {
