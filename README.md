@@ -21,7 +21,7 @@ You Need More Help?
 2. Open up Tampermonkey and create a new script
 3. Copy paste the script from `jira-calculate-hours.js` or link it with `@requires` from you userscript definition.
 4. **Modify @include URL in the header to match your JIRA url**
-5. Navigate to your JIRA issues and behold, there is a number in the footer
+5. Navigate to your JIRA issues and behold, there is magic in the footer
 
 Screenshot
 ----------
