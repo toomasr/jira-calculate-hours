@@ -23,6 +23,11 @@ You Need More Help?
 4. **Modify @include URL in the header to match your JIRA url**
 5. Navigate to your JIRA issues and behold, there is a number in the footer
 
+Screenshot
+----------
+
+![Screenshot of the View](https://raw.githubusercontent.com/toomasr/jira-calculate-hours/master/screenshots/calculate-hours-screenshot.png)
+
 FAQ
 --------
 
