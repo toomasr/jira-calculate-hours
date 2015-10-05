@@ -26,7 +26,7 @@ You Need More Help?
 FAQ
 --------
 
-* **I've completed the instructions but somestimes the value remains stale in the footer?**
+* **I've completed the instructions but sometimes the value remains stale in the footer?**
 
 I don't why this happens but once you reload the page it is fine again for me. If you know the reason and fix do let me know and I'll update my script!
 
