@@ -32,6 +32,7 @@ function addEstimatesFooter() {
     // Calculate sums for the estimate columns
     resultRow.find(".timeoriginalestimate").html(formatEstimate(sumMinutes(".timeoriginalestimate")));
     resultRow.find(".timeestimate").html(formatEstimate(sumMinutes(".timeestimate")));
+    resultRow.find(".timespent").html(formatEstimate(sumMinutes(".timespent")));
 
     var footer = jQuery("<tfoot></tfoot>").append(resultRow);
     jQuery("#issuetable").append(footer);
